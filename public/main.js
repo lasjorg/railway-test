@@ -2,12 +2,10 @@ const nameList = document.querySelector('.name-list');
 const form = document.querySelector('#form');
 
 let development = false;
-const URI = development
-  ? 'http://localhost:3000/'
-  : 'railway-test-production-af91.up.railway.app/';
+const URI = development ? 'http://localhost:3000/' : '/';
 
 function getNames() {
-  return fetch(`${URI}${names}`)
+  return fetch(`${URI}names`)
     .then((response) => response.json())
     .then((data) => {
       return data;
@@ -17,7 +15,8 @@ function getNames() {
 function addName(e) {
   e.preventDefault();
   const name = new FormData(form).get('name');
-  fetch(`${URI}${nameNames}`, {
+  document.querySelector('#name').value = '';
+  fetch(`${URI}newName`, {
     method: 'POST',
     body: JSON.stringify({
       name,
@@ -32,15 +31,7 @@ function addName(e) {
 }
 
 function render(names) {
-  let HTML = '';
-  HTML = names
-    .map((name) => {
-      return `
-      <li>${name.name}</li>
-    `;
-    })
-    .join('');
-  nameList.innerHTML = HTML;
+  nameList.innerHTML = names.map((name) => `<li>${name.name}</li>`).join('');
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

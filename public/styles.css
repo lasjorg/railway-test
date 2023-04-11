@@ -6,13 +6,18 @@
 
 h1 {
   text-align: center;
-}
-
-.name-list li {
-  list-style-position: inside !important;
+  margin-bottom: 1rem;
 }
 
 .wrapper {
   width: min(860px, 85vw);
   margin-inline: auto;
+}
+
+.list {
+  margin-top: 1rem;
+}
+
+.name-list li {
+  list-style-position: inside !important;
 }
