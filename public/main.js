@@ -1,11 +1,15 @@
 const nameList = document.querySelector('.name-list');
 const form = document.querySelector('#form');
 
+let development = false;
+const URI = development
+  ? 'http://localhost:3000/'
+  : 'railway-test-production-af91.up.railway.app/';
+
 function getNames() {
-  return fetch('http://localhost:3000/names')
+  return fetch(`${URI}${names}`)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       return data;
     });
 }
@@ -13,7 +17,7 @@ function getNames() {
 function addName(e) {
   e.preventDefault();
   const name = new FormData(form).get('name');
-  fetch('http://localhost:3000/newName', {
+  fetch(`${URI}${nameNames}`, {
     method: 'POST',
     body: JSON.stringify({
       name,
@@ -41,7 +45,6 @@ function render(names) {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const names = await getNames();
-  console.log(names);
   render(names);
 
   form.addEventListener('submit', addName);
